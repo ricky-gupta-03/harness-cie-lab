@@ -1,4 +1,4 @@
-FROM tomcat:jre8-openjdk-slim-buster
+FROM tomcat:9.0-jdk11-temurin
 
 
 RUN apt-get update
