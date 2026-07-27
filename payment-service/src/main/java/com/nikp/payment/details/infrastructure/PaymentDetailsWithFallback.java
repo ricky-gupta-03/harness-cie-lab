@@ -1,6 +1,7 @@
 package com.nikp.payment.details.infrastructure;
 
-import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+//import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.nikp.eventbus.api.EventBus;
 import com.nikp.eventbus.domain.Event;
 import com.nikp.payment.details.api.PaymentDetails;

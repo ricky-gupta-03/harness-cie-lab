@@ -1,6 +1,8 @@
 package com.nikp.payment.service;
 
-import org.apache.log4j.Logger;
+// import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.metrics.instrument.MeterRegistry;
 import org.springframework.stereotype.Component;

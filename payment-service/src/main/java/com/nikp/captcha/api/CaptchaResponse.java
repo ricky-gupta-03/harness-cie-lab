@@ -3,7 +3,8 @@ package com.nikp.captcha.api;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.cloud.cloudfoundry.com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonProperty;
+// import org.springframework.cloud.cloudfoundry.com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CaptchaResponse {
 
