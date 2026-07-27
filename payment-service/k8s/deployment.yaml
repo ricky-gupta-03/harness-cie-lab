@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: payment-service
-        image: <+artifact.image>
+        image: rickygupta3/harness-repo:59
         ports:
         - containerPort: 8080
         resources:
