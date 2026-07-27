@@ -12,10 +12,10 @@
     <description>Spring-app</description>
 
     <parent>
-    	<groupId>org.springframework.boot</groupId>
-    	<artifactId>spring-boot-starter-parent</artifactId>
-    	<version>2.7.18</version>
-	</parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.18</version>
+    </parent>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -43,30 +43,31 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
+
+        <!-- Renamed Netflix Eureka starters (old spring-cloud-starter-eureka* removed from BOM) -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-cloud-connectors</artifactId>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-eureka</artifactId>
+            <artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
         </dependency>
+
+        <!-- Hystrix replacement: Resilience4j (Hystrix is EOL / removed from Spring Cloud) -->
         <dependency>
             <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-eureka-server</artifactId>
+            <artifactId>spring-cloud-starter-circuitbreaker-resilience4j</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-hystrix</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-hystrix-dashboard</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-ribbon</artifactId>
-        </dependency>
+
+        <!--
+          Removed: spring-boot-starter-cloud-connectors (Cloud Foundry only, removed from Boot 2.3+)
+          Removed: spring-cloud-starter-hystrix-dashboard (no replacement, deprecated)
+          Removed: spring-cloud-starter-ribbon (Ribbon deprecated; load balancing now handled
+                    automatically by spring-cloud-starter-netflix-eureka-client via
+                    Spring Cloud LoadBalancer)
+        -->
+
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter</artifactId>
@@ -105,10 +106,6 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webflux</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-websocket</artifactId>
         </dependency>
 
@@ -138,14 +135,17 @@
             <artifactId>spring-security-test</artifactId>
             <scope>test</scope>
         </dependency>
-	<dependency>
-		<groupId>cn.apiclub.tool</groupId>
-		<artifactId>simplecaptcha</artifactId>
-		<version>1.2.2</version> <!-- we have to manage version here -->
-	</dependency>
+        <dependency>
+            <groupId>cn.apiclub.tool</groupId>
+            <artifactId>simplecaptcha</artifactId>
+            <version>1.2.2</version> <!-- we have to manage version here -->
+        </dependency>
+
+        <!-- webjars-locator needs an explicit version (not managed by any BOM here) -->
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>webjars-locator</artifactId>
+            <version>0.46</version>
         </dependency>
         <dependency>
             <groupId>org.webjars</groupId>
@@ -167,11 +167,11 @@
             <artifactId>jquery</artifactId>
             <version>3.1.0</version>
         </dependency>
-          <dependency>
-      <groupId>io.harness</groupId>
-      <artifactId>ff-java-server-sdk</artifactId>
-      <version>1.0.3</version>
-    </dependency>
+        <dependency>
+            <groupId>io.harness</groupId>
+            <artifactId>ff-java-server-sdk</artifactId>
+            <version>1.0.3</version>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
@@ -187,7 +187,7 @@
     </dependencyManagement>
 
     <build>
-    	<finalName>nikp-payments</finalName>
+        <finalName>nikp-payments</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -201,17 +201,17 @@
                     <target>8</target>
                 </configuration>
             </plugin>
-            	<plugin>
-    			<groupId>org.apache.maven.plugins</groupId>
-    			<artifactId>maven-surefire-plugin</artifactId>
-    			<version>2.22.1</version>
-    			<configuration>
-    			    <forkCount>1</forkCount>
-    				<reuseForks>true</reuseForks>
-    				<argLine>-Xmx1024m -XX:MaxPermSize=256m -javaagent:/addon/bin/java-agent.jar=/addon/tmp/config.ini</argLine>
-       				 <useSystemClassLoader>false</useSystemClassLoader>
-    			</configuration>
-			</plugin>  
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.1</version>
+                <configuration>
+                    <forkCount>1</forkCount>
+                    <reuseForks>true</reuseForks>
+                    <argLine>-Xmx1024m -XX:MaxPermSize=256m -javaagent:/addon/bin/java-agent.jar=/addon/tmp/config.ini</argLine>
+                    <useSystemClassLoader>false</useSystemClassLoader>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 
@@ -252,6 +252,5 @@
             </snapshots>
         </pluginRepository>
     </pluginRepositories>
-
 
 </project>
